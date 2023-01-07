@@ -38,25 +38,19 @@ public class HomeController : Controller
         else 
         return View();
     }
-    List<Student> students=new List<Student>();
+    
      public IActionResult InsertData(string firstName, string lastName, string motherName, string fatherName, string dob, 
-    
     string gender, string address,string state, string pincode, string course, string email){
-        students.Add(new Student(firstName, lastName, motherName, fatherName, dob, gender, address,state, pincode, course, email));
         
-        // string? fileName=@"D:\cdac\dotNET\yoNinjia\yoNinja\yoNinj.json";
-        // // var options=new JsonSerializerOptions {IncludeFields=true};
-        // string? stdDetailsJson= JsonSerializer.Serialize<List<Student>>(students);
-    
-        // File.WriteAllText(fileName,stdDetailsJson);
+        List<Student> students=new List<Student>();
+        students.Add(new Student(firstName, lastName, motherName, fatherName, dob, gender, address,state, pincode, course, email));
         var options=new JsonSerializerOptions {IncludeFields=true};
             string produtsJson=JsonSerializer.Serialize<List<Student>>(students,options);
             string fileName=@"D:\mhwak\products.json";
-            //Serialize all Flowers into json file
 
             System.IO.File.WriteAllText(fileName,produtsJson);
-            Console.WriteLine(produtsJson);
-        return View();
+        
+        return Redirect("/home/Index");
     }
 
     public IActionResult Privacy()
