@@ -50,11 +50,12 @@ public class HomeController : Controller
     
         // File.WriteAllText(fileName,stdDetailsJson);
         var options=new JsonSerializerOptions {IncludeFields=true};
-            var produtsJson=JsonSerializer.Serialize<List<Student>>(students,options);
+            string produtsJson=JsonSerializer.Serialize<List<Student>>(students,options);
             string fileName=@"D:\mhwak\products.json";
             //Serialize all Flowers into json file
 
-            File.WriteAllText(fileName,produtsJson);
+            System.IO.File.WriteAllText(fileName,produtsJson);
+            Console.WriteLine(produtsJson);
         return View();
     }
 
